@@ -16,9 +16,9 @@ export default class App extends Component {
   }
 
 // handling input change
-  handleChange(event) {
-    this.setState({toDoList: event.target.value})
-  }
+  // handleChange(event) {
+  //   this.setState({toDoList: event.target.value})
+  // }
 
   // handling on submit event
   handleSubmit(event) {
@@ -35,7 +35,7 @@ export default class App extends Component {
      <div>
      <form onSubmit={this.handleSubmit}>
         <label>
-          Name:
+          Submit a ToDo:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
