@@ -8,24 +8,32 @@ export default class App extends Component {
     super(props)
 
     this.state = {
+      value: '',
       toDoList: [],
       toDos: false,
     }
-   // this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-// handling input change
-  // handleChange(event) {
-  //   this.setState({toDoList: event.target.value})
-  // }
+  // handling input change
+  handleChange(event) {
+    this.setState({value: event.target.value})
+  }
 
   // handling on submit event
   handleSubmit(event) {
     this.setState({
-      toDoList: [...this.state.toDoList, event.target.value]
+      toDoList: [...this.state.toDoList, this.state.value]
     })
     event.preventDefault();
+  }
+
+  handleDelete(index) {
+    const newArr = [...this.state.tasks];
+    newArr.splice(index, 1);
+    this.setState({tasks: newArr});
   }
 
 
@@ -35,12 +43,16 @@ export default class App extends Component {
      <div>
      <form onSubmit={this.handleSubmit}>
         <label>
-          Submit a ToDo:
+          Submit a Todo:
+          <br/>
           <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
-      <List list={this.state.toDoList} />
+      <br></br>
+      <h5>Your current list of todos:</h5>
+      <br></br>
+      <List list={this.state.toDoList} index={this.state.toDoList.length - 1} onDelete={this.handleDelete}/>
       </div>
     )
   }
