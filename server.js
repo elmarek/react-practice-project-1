@@ -1,14 +1,23 @@
-const express = require('express')
-const path = require('path')
-const app = express()
-const port = 3000
+const express = require("express");
+const path = require("path");
+const app = express();
+const port = 3000;
+const Comments = require("./database/db.js");
 
-app.use(express.static(path.join(__dirname, './dist')));
+Comments.find({}, (error, results) => {
+  if (error) {
+    throw error;
+  } else {
+    console.log(results);
+  }
+});
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use(express.static(path.join(__dirname, "./dist")));
+
+app.get("/", (req, res) => {
+  res.send(200);
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+  console.log(`Example app listening at http://localhost:${port}`);
+});

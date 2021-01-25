@@ -3,11 +3,7 @@ var SRC_DIR = path.join(__dirname, "/src");
 var DIST_DIR = path.join(__dirname, "/dist");
 
 module.exports = {
-  entry: `${SRC_DIR}/app.jsx`,
-  output: {
-    filename: "bundle.js",
-    path: DIST_DIR,
-  },
+  entry: `${SRC_DIR}/index.tsx`,
   module: {
     rules: [
       {
@@ -15,13 +11,17 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.jsx?/,
+        test: /\.tsx?/,
         include: SRC_DIR,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: [
+              "@babel/preset-typescript",
+              "@babel/preset-env",
+              "@babel/preset-react",
+            ],
           },
         },
       },
@@ -45,5 +45,12 @@ module.exports = {
         },
       },
     ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+  output: {
+    filename: "bundle.js",
+    path: DIST_DIR,
   },
 };
