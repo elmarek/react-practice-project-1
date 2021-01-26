@@ -1,13 +1,11 @@
 import React from "react";
 
 interface State {
-  name: string;
   email: string;
   password: string;
 }
 function Form() {
   let [state, setState] = React.useState<State>({
-    name: "",
     email: "",
     password: "",
   });
@@ -22,9 +20,7 @@ function Form() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(
-      `Your name is: ` +
-        state.name +
-        " Your email is: " +
+      " Your email is: " +
         state.email +
         " and your password is: " +
         state.password
@@ -33,20 +29,23 @@ function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Name:</label>
+      <label>Email:</label>
       <input
         type="text"
-        name="name"
+        name="email"
+        value={state.email}
         onChange={handleChange}
-        defaultValue={state.name}
+        defaultValue={state.email}
       />
-
-      <br></br>
-      <label>Email:</label>
-      <input type="text" name="email" value={state.email} />
       <br></br>
       <label>Password:</label>
-      <input type="text" name="password" value={state.password} />
+      <input
+        type="text"
+        name="password"
+        value={state.password}
+        onChange={handleChange}
+        defaultValue={state.password}
+      />
       <br></br>
       <input type="submit" value="Submit" />
     </form>

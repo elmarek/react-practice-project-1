@@ -13,6 +13,8 @@ db.once("open", function () {
 
 const commentSchema = new mongoose.Schema({
   name: String,
+  password: String,
+  email: String,
   comments: [String],
   date: { type: Date, default: Date.now },
 });
@@ -20,7 +22,9 @@ const commentSchema = new mongoose.Schema({
 const Comments = mongoose.model("Comments", commentSchema);
 
 const testComments = new Comments({
-  name: "Test",
+  name: "User",
+  password: "test",
+  email: "test@test.com",
   comments: ["Comment 1", "Comment 2", "Comment 3", "Comment 4"],
 });
 
