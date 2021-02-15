@@ -3,6 +3,7 @@ const path = require("path");
 const app = express();
 const port = 3000;
 const Comments = require("./database/db.js");
+const bodyParser = require("body-parser");
 
 Comments.find({}, (error, results) => {
   if (error) {
@@ -13,11 +14,16 @@ Comments.find({}, (error, results) => {
 });
 
 app.use(express.static(path.join(__dirname, "./dist")));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.send(200);
 });
-
+app.post("/login", (req, res) => {
+  console.log(req);
+  res.send(200);
+});
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

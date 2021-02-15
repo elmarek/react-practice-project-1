@@ -19,14 +19,23 @@ function Form() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(
-      " Your email is: " +
-        state.email +
-        " and your password is: " +
-        state.password
-    );
-  };
+    const formData = new FormData();
 
+    formData.append("username", state.email);
+    formData.append("password", state.password);
+    fetch("/login", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    //ok
+  };
   return (
     <form onSubmit={handleSubmit}>
       <label>Email:</label>
