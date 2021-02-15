@@ -21,26 +21,9 @@ function Form() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const email: string = state.email;
-    // // const password: string = state.password;
-    // // console.log("Form target : ", form);
-
-    // // console.log("Form Data :", formData);
-
-    // console.log("Form Data :", formData);
-    // const enteredEmail = textInputRef.current!.value;
-    // const enteredPassword = passwordInputRef.current!.value;
-    //const formData = new FormData();
-    // formData.append("email", enteredEmail);
-    // formData.append("password", enteredPassword);
-    //console.log("submitted : ", enteredEmail, enteredPassword);
     console.log("State is :", state.password);
     fetch("/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
       body: JSON.stringify({ state }),
     })
       .then((response) => response.json())
@@ -50,7 +33,6 @@ function Form() {
       .catch((error) => {
         console.error("Error:", error);
       });
-    //ok
   };
   return (
     <form onSubmit={handleSubmit}>
