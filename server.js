@@ -21,7 +21,9 @@ app.get("/", (req, res) => {
   res.send(200);
 });
 app.post("/login", (req, res) => {
-  console.log(req);
+  const email = req.body.state.email;
+  const pass = req.body.state.password;
+  console.log("email is :", email, "password is :", pass);
   res.send(200);
 });
 app.listen(port, () => {

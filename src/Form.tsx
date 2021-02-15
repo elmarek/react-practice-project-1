@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 interface State {
   email: string;
@@ -15,17 +15,33 @@ function Form() {
       ...state,
       [e.currentTarget.name]: e.currentTarget.value,
     });
+    console.log(state);
   };
-
+  const textInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
+    // const email: string = state.email;
+    // // const password: string = state.password;
+    // // console.log("Form target : ", form);
 
-    formData.append("username", state.email);
-    formData.append("password", state.password);
+    // // console.log("Form Data :", formData);
+
+    // console.log("Form Data :", formData);
+    // const enteredEmail = textInputRef.current!.value;
+    // const enteredPassword = passwordInputRef.current!.value;
+    //const formData = new FormData();
+    // formData.append("email", enteredEmail);
+    // formData.append("password", enteredPassword);
+    //console.log("submitted : ", enteredEmail, enteredPassword);
+    console.log("State is :", state.password);
     fetch("/login", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({ state }),
     })
       .then((response) => response.json())
       .then((result) => {
@@ -44,7 +60,7 @@ function Form() {
         name="email"
         value={state.email}
         onChange={handleChange}
-        defaultValue={state.email}
+        //  ref={textInputRef}
       />
       <br></br>
       <label>Password:</label>
@@ -53,7 +69,7 @@ function Form() {
         name="password"
         value={state.password}
         onChange={handleChange}
-        defaultValue={state.password}
+        //  ref={passwordInputRef}
       />
       <br></br>
       <input type="submit" value="Submit" />
