@@ -27,8 +27,8 @@ function Form() {
       body: JSON.stringify({ state }),
     })
       .then((response) => response.json())
-      .then((result) => {
-        console.log("Success:", result);
+      .then((response) => {
+        console.log("Success:", response);
       })
       .catch((error) => {
         console.error("Error:", error);
